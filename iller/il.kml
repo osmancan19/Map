@@ -7,7 +7,7 @@
 </Schema>
 <Folder><name>gadm36_TUR_1</name>
   <Placemark>
-	<Style><LineStyle><color>#000000</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<Style><LineStyle><color>#000000</color></LineStyle><PolyStyle><fill>1</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#gadm36_TUR_1">
 		<SimpleData name="NAME_0">Turkey</SimpleData>
 		<SimpleData name="NAME_1">Adana</SimpleData>
