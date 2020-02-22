@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Maps</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #content-window {
+        float: left;
+        font-family: 'Roboto','sans-serif';
+        height: 100%;
+        line-height: 30px;
+        padding-left: 10px;
+        width: 19%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      var il = 'https://raw.githubusercontent.com/osmancan19/Map/master/json/iller.json';
+      var ilce = 'https://raw.githubusercontent.com/osmancan19/Map/master/json/ilçeler.json';
+
+      var callback = function(feature) {map.data.remove(feature);
+   };
+   
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 39.206892, lng: 34.874659},
+          zoom: 6,
+          minZoom: 5,
+          maxZoom: 10
+        });
+
+
+        map.data.setStyle({
+          fillColor: 'white',
+          fillOpacity: .01,
+          strokeWeight: 1
+        });
+
+      map.data.addListener('click', function(event) {
+          
+      });
+      map.data.addListener('mouseover', function(event) {
+        map.data.revertStyle();
+        map.data.overrideStyle(event.feature, {strokeWeight: 4,strokeColor: '#FFFF00',fillColor: 'yellow'});
+        
+      });
+
+      map.data.addListener('mouseout', function(event) {
+        map.data.revertStyle();
+        
+      }); 
+      map.addListener("zoom_changed", function() {
+        if(map.getZoom()>=6 && map.getZoom()<9){
+          map.data.forEach(callback);
+          map.data.loadGeoJson(il);
+        }
+        else if(map.getZoom()>=9){
+          map.data.forEach(callback);
+          map.data.loadGeoJson(ilce);
+        }
+        else
+        {
+          map.data.forEach(callback);
+        }
+      }); 
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFmfQvwrDcIhydCs_SIr5zlIHVh3agU0I&callback=initMap"
+    async defer></script>
+  </body>
+</html>
